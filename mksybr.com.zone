@@ -1,0 +1,19 @@
+$ORIGIN mksybr.com.
+$TTL 1800
+mksybr.com. IN SOA ns1.digitalocean.com. hostmaster.mksybr.com. 1695863994 10800 3600 604800 1800
+mksybr.com. 60 IN A 185.199.108.153
+mksybr.com. 60 IN A 185.199.109.153
+mksybr.com. 60 IN A 185.199.110.153
+mksybr.com. 60 IN A 185.199.111.153
+mksybr.com. 60 IN AAAA 2606:50c0:8000::153
+mksybr.com. 60 IN AAAA 2606:50c0:8001::153
+mksybr.com. 60 IN AAAA 2606:50c0:8002::153
+mksybr.com. 60 IN AAAA 2606:50c0:8003::153
+mksybr.com. 30 IN CAA 0 issue "letsencrypt.org"
+mksybr.com. 30 IN CAA 0 issuewild "letsencrypt.org"
+location.mksybr.com. 30 IN CNAME hauk-location-sharing.onrender.com.
+screen.mksybr.com. 30 IN CNAME screego.onrender.com.
+ns1.mksybr.com. IN  A 100.126.87.31
+ns2.mksybr.com. IN  A 100.126.87.31
+_github-pages-challenge-aeyk.mksybr.com. 60 IN TXT ce594ae1f9e92b036fb10a9b67d312
+x10sllf.mksybr.com. 69 IN A 100.126.87.31

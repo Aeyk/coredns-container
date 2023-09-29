@@ -1,0 +1,76 @@
+. {
+  transfer {
+    to 127.0.0.1
+  }
+	view home {
+	  expr incidr(client_ip(), '0.0.0.0/8')
+	  expr incidr(client_ip(), '10.0.0.0/8')
+		expr incidr(client_ip(), '100.0.0.0/10')	# Tailscale
+		expr incidr(client_ip(), '127.0.0.0/8')
+		expr incidr(client_ip(), '172.16.0.0/12')
+		expr incidr(client_ip(), '192.168.0.0/16')
+		file /etc/coredns/mksybr.com.zone mksybr.com
+	}
+	forward . 100.100.100.100 9.9.9.9 8.8.8.8 1.1.1.1 {
+    except mksybr.com
+  }
+  log
+  errors
+  cache
+  health :9999
+  whoami
+  any
+}
+
+. {
+  transfer {
+    to 127.0.0.1
+  }
+	forward . 100.100.100.100 9.9.9.9 8.8.8.8 1.1.1.1
+  log
+  errors
+  cache
+  health :9999
+  whoami
+  any
+}
+
+tls://. {
+  tls /etc/letsencrypt/live/mksybr.com/fullchain.pem /etc/letsencrypt/live/mksybr.com/key.pem /etc/ssl/certs/ca-certificates.crt
+	view home {
+	  expr incidr(client_ip(), '0.0.0.0/8')
+	  expr incidr(client_ip(), '10.0.0.0/8')
+		expr incidr(client_ip(), '100.0.0.0/10')	# Tailscale
+		expr incidr(client_ip(), '127.0.0.0/8')
+		expr incidr(client_ip(), '172.16.0.0/12')
+		expr incidr(client_ip(), '192.168.0.0/16')
+		file /etc/coredns/mksybr.com.zone mksybr.com
+	}
+	forward . /etc/resolv.conf
+  transfer {
+    to 127.0.0.1
+  }
+  forward . 100.100.100.100 9.9.9.9 8.8.8.8 1.1.1.1
+  log
+  errors
+  cache
+  health :9999
+  whoami
+  any
+}
+
+
+tls://. {
+  tls /etc/letsencrypt/live/mksybr.com/fullchain.pem /etc/letsencrypt/live/mksybr.com/key.pem /etc/ssl/certs/ca-certificates.crt
+	forward . /etc/resolv.conf
+  transfer {
+    to 127.0.0.1
+  }
+  forward . 100.100.100.100 9.9.9.9 8.8.8.8 1.1.1.1
+  log
+  errors
+  cache
+  health :9999
+  whoami
+  any
+}
